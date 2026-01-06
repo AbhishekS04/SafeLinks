@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -67,7 +66,7 @@ export function AddLink() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setIsOpen(true)}
-                        className="group flex items-center gap-3 w-full p-4 rounded-xl border border-dashed border-border/60 hover:border-accent/40 hover:bg-white/50 transition-all duration-300"
+                        className="group flex items-center gap-3 w-full p-4 rounded-xl border border-dashed border-border/60 hover:border-accent/40 hover:bg-white/5 transition-all duration-300"
                     >
                         <div className="p-2 rounded-full bg-border/30 group-hover:bg-accent/10 transition-colors">
                             <Plus className="w-4 h-4 text-muted-foreground group-hover:text-accent" />
@@ -81,7 +80,7 @@ export function AddLink() {
                         initial={{ opacity: 0, y: 10, scale: 0.98 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.95 }}
-                        className="rounded-xl border border-border bg-input/50 backdrop-blur-xl p-6 shadow-sm"
+                        className="rounded-xl border border-border bg-[#181818]/95 backdrop-blur-xl p-6 shadow-2xl relative z-10"
                     >
                         <form action={formAction}>
                             <div className="space-y-4">

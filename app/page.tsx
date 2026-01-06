@@ -6,42 +6,56 @@ import { links } from "@/db/schema";
 import { auth } from "@clerk/nextjs/server";
 import { desc, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
+import { LinkVault } from "@/components/features/LinkVault";
+import { PageTransition } from "@/components/ui/PageTransition";
 
-async function getLinks() {
-  const { userId } = await auth();
-  if (!userId) return [];
+export const dynamic = "force-dynamic";
 
+async function getLinks(userId: string) {
   return db.select()
     .from(links)
     .where(eq(links.userId, userId))
     .orderBy(desc(links.createdAt));
 }
 
-import { LinkVault } from "@/components/features/LinkVault";
-
 export default async function Home() {
   const { userId } = await auth();
-  const userLinks = await getLinks();
+
+  if (!userId) {
+    redirect("/sign-in");
+  }
+
+  const start = performance.now();
+  const userLinks = await getLinks(userId);
+  const end = performance.now();
+  console.log(`[PERF] Fetching links took ${(end - start).toFixed(2)}ms`);
 
   return (
-    <div className="flex flex-col gap-8 min-h-screen">
+    <PageTransition className="max-w-xl mx-auto py-8 px-6 min-h-screen flex flex-col">
       <Navbar />
 
-      <div className="flex-1 flex flex-col gap-8">
-        <section className="flex flex-col gap-1">
-          <h1 className="text-3xl font-serif italic text-foreground tracking-tight">
-            My Vault
-          </h1>
-          <p className="text-muted-foreground text-sm">
-            {userLinks.length} items collected
-          </p>
-        </section>
+      <header className="mb-16 mt-16 text-center space-y-2">
+        <h1 className="text-4xl font-serif text-foreground/90">
+          {(() => {
+            const hour = new Date().getHours();
+            const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+            return `${greeting}, Abhishek`;
+          })()}
+        </h1>
+      </header>
 
-        {userId && <AddLink />}
+      <main className="flex-1">
+        <AddLink />
+        <div className="mt-16">
+          <LinkVault links={userLinks} />
+        </div>
+      </main>
 
-        {/* Client-side Link Vault with Animations & Pagination */}
-        <LinkVault links={userLinks} />
-      </div>
-    </div>
+      <footer className="mt-20 pt-8 border-t border-border/20 text-center">
+        <p className="text-sm text-muted-foreground/40 font-mono hover:text-muted-foreground/60 transition-colors cursor-default">
+          Copyright @ Abhishek Singh
+        </p>
+      </footer>
+    </PageTransition>
   );
 }

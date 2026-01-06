@@ -79,7 +79,7 @@ export function LinkVault({ links }: LinkVaultProps) {
 
     return (
         <div className="space-y-12 pb-24">
-            <AnimatePresence mode="popLayout">
+            <AnimatePresence>
                 {sortedCategories.map(([category, linksInCategory]) => (
                     <motion.section
                         key={category}

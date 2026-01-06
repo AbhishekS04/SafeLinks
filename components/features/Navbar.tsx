@@ -13,7 +13,7 @@ export function Navbar() {
                 <div className="p-1.5 rounded-md bg-muted border border-border/60 shadow-sm group-hover:shadow-md transition-all duration-300">
                     <LinkIcon className="w-4 h-4 text-accent/80" />
                 </div>
-                <span className="text-lg font-medium tracking-tight text-foreground/90 group-hover:text-foreground transition-colors">
+                <span className="text-lg font-medium font-serif italic tracking-tight text-foreground/90 group-hover:text-foreground transition-colors">
                     SafeLinks
                 </span>
             </div>
