@@ -66,27 +66,27 @@ export function SearchOverlay() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="fixed inset-0 z-50 flex items-start justify-center pt-[20vh] bg-background/60 backdrop-blur-sm"
+                    className="fixed inset-0 z-50 flex items-start justify-center pt-[20vh] bg-black/40 backdrop-blur-sm"
                     onClick={closeSearch}
                 >
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                        initial={{ opacity: 0, scale: 0.98, y: 10 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                        transition={{ duration: 0.2 }}
-                        className="w-full max-w-lg bg-background rounded-xl shadow-2xl border border-border/40 overflow-hidden"
+                        exit={{ opacity: 0, scale: 0.98, y: 10 }}
+                        transition={{ duration: 0.2, ease: "circOut" }}
+                        className="w-full max-w-lg bg-black/60 backdrop-blur-3xl rounded-2xl shadow-2xl shadow-black/50 border border-white/5 overflow-hidden"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <div className="flex items-center px-4 py-3 border-b border-border/40">
+                        <div className="flex items-center px-5 py-4">
                             <Search className="w-4 h-4 text-muted-foreground mr-3" />
                             <input
                                 autoFocus
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
                                 placeholder="Search your calm space..."
-                                className="flex-1 bg-transparent outline-none text-base text-foreground placeholder:text-muted-foreground/50"
+                                className="flex-1 bg-transparent outline-none text-base text-white placeholder:text-muted-foreground/40 font-light"
                             />
-                            <kbd className="hidden sm:inline-flex h-5 items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                            <kbd className="hidden sm:inline-flex h-5 items-center gap-1 rounded border border-white/10 bg-white/5 px-1.5 font-mono text-[9px] font-medium text-muted-foreground">
                                 ESC
                             </kbd>
                         </div>
@@ -94,7 +94,7 @@ export function SearchOverlay() {
                         <div className="p-2 max-h-[300px] overflow-y-auto">
                             {/* Results */}
                             {results.length > 0 ? (
-                                <div className="space-y-1">
+                                <div className="space-y-0.5">
                                     {results.map((result, i) => (
                                         <button
                                             key={i}
@@ -102,10 +102,10 @@ export function SearchOverlay() {
                                                 router.push(result.href);
                                                 closeSearch();
                                             }}
-                                            className="flex items-center w-full px-3 py-2 text-sm rounded-lg hover:bg-black/5 transition-colors text-left group"
+                                            className="flex items-center w-full px-4 py-3 text-sm rounded-xl hover:bg-white/5 transition-colors text-left group"
                                         >
-                                            {result.type === "doc" ? <FileText className="w-4 h-4 mr-3 text-muted-foreground group-hover:text-foreground" /> : <LinkIcon className="w-4 h-4 mr-3 text-muted-foreground group-hover:text-foreground" />}
-                                            <span className="flex-1 text-muted-foreground group-hover:text-foreground">{result.title}</span>
+                                            {result.type === "doc" ? <FileText className="w-4 h-4 mr-3 text-muted-foreground/60 group-hover:text-foreground/80" /> : <LinkIcon className="w-4 h-4 mr-3 text-muted-foreground/60 group-hover:text-foreground/80" />}
+                                            <span className="flex-1 text-muted-foreground group-hover:text-foreground/90 font-light">{result.title}</span>
                                         </button>
                                     ))}
                                 </div>

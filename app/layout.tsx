@@ -25,6 +25,7 @@ export const metadata: Metadata = {
 };
 
 import { UiProvider } from "@/components/providers/UiProvider";
+import { SmoothScroll } from "@/components/providers/SmoothScroll";
 
 export default function RootLayout({
   children,
@@ -47,6 +48,7 @@ export default function RootLayout({
           )}
         >
           <UiProvider>
+            <SmoothScroll />
             <SearchOverlay />
             <main className="w-full max-w-2xl px-6 py-12 flex-1 flex flex-col">
               {children}

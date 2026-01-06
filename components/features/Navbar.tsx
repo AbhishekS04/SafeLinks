@@ -10,9 +10,6 @@ export function Navbar() {
     return (
         <header className="flex items-center justify-between pb-8 pt-4 w-full">
             <div className="flex items-center gap-2 group cursor-default">
-                <div className="p-1.5 rounded-md bg-muted border border-border/60 shadow-sm group-hover:shadow-md transition-all duration-300">
-                    <LinkIcon className="w-4 h-4 text-accent/80" />
-                </div>
                 <span className="text-lg font-medium font-serif italic tracking-tight text-foreground/90 group-hover:text-foreground transition-colors">
                     SafeLinks
                 </span>
