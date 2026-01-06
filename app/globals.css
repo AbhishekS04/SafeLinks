@@ -1,26 +1,60 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Notion/Claude Dark Mode Palette */
+  --background: #191919;
+  /* Deep charcoal, soft dark */
+  --foreground: #ededed;
+  /* Off-white, readable */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --muted: #2e2e2e;
+  /* Slightly lighter background for cards/hover */
+  --muted-foreground: #a1a1aa;
+  /* Zinc-400 equivalent */
+
+  --border: #333333;
+  /* Subtle border */
+  --input: #262626;
+  /* Input background */
+  --ring: #525252;
+  /* Focus ring */
+
+  --accent: #9ca3af;
+  /* Soft zinc accent, not harsh */
+
+  /* Fumadocs Overrides */
+  --fd-background: var(--background);
+  --fd-foreground: var(--foreground);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Optional dark mode override if needed, but user specifically asked for "Soft Gray Background #f3f3f3" range which implies light mode primary. 
+       I will keep it light-mode focused as per "No pure black" and specific hex codes. 
+       If dark mode is needed, I'll add it later but keep it soft charcoal, not black.
+       For now, forcing the requested aesthetic. */
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  font-family: var(--font-inter), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--accent);
+  color: white;
+  opacity: 0.3;
+}
+
+/* Override Fumadocs ... */
+:root {
+  --fd-background: var(--background);
+}
+
+/* Fix for select options in Dark Mode */
+select option {
+  background-color: var(--background);
+  color: var(--foreground);
 }

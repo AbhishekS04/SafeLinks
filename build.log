@@ -1,0 +1,72 @@
+
+> safelinks@0.1.0 build
+> next build
+
+Γû▓ Next.js 16.1.1 (Turbopack)
+- Environments: .env.local
+
+[MDX] generated files in 28.034599999999955ms
+ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 3 errors:
+./lib/source.ts:2:1
+Module not found: Can't resolve '@/.source'
+  1 |
+> 2 | import { docs, meta } from "@/.source";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { createMDXSource } from "fumadocs-mdx";
+  4 | import { loader } from "fumadocs-core/source";
+  5 |
+
+Import map: aliased to relative './.source' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./lib/source.ts
+    ./app/docs/[[...slug]]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/docs/layout.tsx:2:1
+Module not found: Can't resolve 'fumadocs-ui/layout'
+  1 |
+> 2 | import { DocsLayout } from "fumadocs-ui/layout";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import type { ReactNode } from "react";
+  4 | import { source } from "@/lib/source";
+  5 |
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./lib/source.ts:3:1
+Export createMDXSource doesn't exist in target module
+  1 |
+  2 | import { docs, meta } from "@/.source";
+> 3 | import { createMDXSource } from "fumadocs-mdx";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { loader } from "fumadocs-core/source";
+  5 |
+  6 | export const source = loader({
+
+The export createMDXSource was not found in module [project]/node_modules/fumadocs-mdx/dist/index.js [app-rsc] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./lib/source.ts
+    ./app/docs/[[...slug]]/page.tsx
+
+
+    at <unknown> (./lib/source.ts:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/docs/layout.tsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./lib/source.ts:3:1)
