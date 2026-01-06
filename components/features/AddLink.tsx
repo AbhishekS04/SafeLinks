@@ -9,6 +9,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { CustomSelect, Option } from "../ui/custom-select";
 import { addLink, fetchMetadata } from "@/app/actions";
+import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 export function AddLink() {
     const [isOpen, setIsOpen] = useState(false);
@@ -61,20 +62,41 @@ export function AddLink() {
         <div className="w-full mb-12">
             <AnimatePresence mode="wait">
                 {!isOpen ? (
-                    <motion.button
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        onClick={() => setIsOpen(true)}
-                        className="group flex items-center gap-3 w-full p-4 rounded-xl border border-dashed border-border/60 hover:border-accent/40 hover:bg-white/5 transition-all duration-300"
-                    >
-                        <div className="p-2 rounded-full bg-border/30 group-hover:bg-accent/10 transition-colors">
-                            <Plus className="w-4 h-4 text-muted-foreground group-hover:text-accent" />
-                        </div>
-                        <span className="text-muted-foreground font-medium group-hover:text-foreground transition-colors">
-                            Capture a new link...
-                        </span>
-                    </motion.button>
+                    <>
+                        <SignedOut>
+                            <SignInButton mode="modal">
+                                <motion.button
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    className="group flex items-center gap-3 w-full p-4 rounded-xl border border-dashed border-border/60 hover:border-accent/40 hover:bg-white/5 transition-all duration-300"
+                                >
+                                    <div className="p-2 rounded-full bg-border/30 group-hover:bg-accent/10 transition-colors">
+                                        <Plus className="w-4 h-4 text-muted-foreground group-hover:text-accent" />
+                                    </div>
+                                    <span className="text-muted-foreground font-medium group-hover:text-foreground transition-colors">
+                                        Capture a new link...
+                                    </span>
+                                </motion.button>
+                            </SignInButton>
+                        </SignedOut>
+                        <SignedIn>
+                            <motion.button
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setIsOpen(true)}
+                                className="group flex items-center gap-3 w-full p-4 rounded-xl border border-dashed border-border/60 hover:border-accent/40 hover:bg-white/5 transition-all duration-300"
+                            >
+                                <div className="p-2 rounded-full bg-border/30 group-hover:bg-accent/10 transition-colors">
+                                    <Plus className="w-4 h-4 text-muted-foreground group-hover:text-accent" />
+                                </div>
+                                <span className="text-muted-foreground font-medium group-hover:text-foreground transition-colors">
+                                    Capture a new link...
+                                </span>
+                            </motion.button>
+                        </SignedIn>
+                    </>
                 ) : (
                     <motion.div
                         initial={{ opacity: 0, y: 10, scale: 0.98 }}

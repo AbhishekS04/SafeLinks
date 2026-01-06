@@ -21,14 +21,7 @@ async function getLinks(userId: string) {
 export default async function Home() {
   const { userId } = await auth();
 
-  if (!userId) {
-    redirect("/sign-in");
-  }
-
-  const start = performance.now();
-  const userLinks = await getLinks(userId);
-  const end = performance.now();
-  console.log(`[PERF] Fetching links took ${(end - start).toFixed(2)}ms`);
+  const userLinks = userId ? await getLinks(userId) : [];
 
   return (
     <PageTransition className="max-w-xl mx-auto py-8 px-6 min-h-screen flex flex-col">
@@ -39,7 +32,7 @@ export default async function Home() {
           {(() => {
             const hour = new Date().getHours();
             const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
-            return `${greeting}, Abhishek`;
+            return userId ? `${greeting}, Abhishek` : greeting;
           })()}
         </h1>
       </header>

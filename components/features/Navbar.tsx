@@ -1,7 +1,7 @@
 
 "use client";
 
-import { UserButton, SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import { UserButton, SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { Link as LinkIcon, Search } from "lucide-react";
 import { useUi } from "@/components/providers/UiProvider";
 
@@ -23,27 +23,17 @@ export function Navbar() {
                     <Search className="w-4 h-4" />
                 </button>
 
-                <div className="h-4 w-[1px] bg-border/60" />
-
-                <div className="flex items-center">
-                    <SignedOut>
-                        <SignInButton mode="modal">
-                            <button className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                                Sign In
-                            </button>
-                        </SignInButton>
-                    </SignedOut>
-                    <SignedIn>
-                        <UserButton
-                            userProfileMode="modal"
-                            appearance={{
-                                elements: {
-                                    avatarBox: "w-8 h-8 rounded-full ring-2 ring-white shadow-sm"
-                                }
-                            }}
-                        />
-                    </SignedIn>
-                </div>
+                <SignedIn>
+                    <div className="h-4 w-[1px] bg-border/60" />
+                    <UserButton
+                        userProfileMode="modal"
+                        appearance={{
+                            elements: {
+                                avatarBox: "w-8 h-8 rounded-full ring-2 ring-white shadow-sm"
+                            }
+                        }}
+                    />
+                </SignedIn>
             </div>
         </header>
     );
