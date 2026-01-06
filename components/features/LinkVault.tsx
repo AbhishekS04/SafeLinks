@@ -5,6 +5,7 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 import { ArrowDown, Trash2, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { deleteLink } from "@/app/actions";
+import { getSafeHostname } from "@/lib/url";
 
 interface LinkType {
     id: string;
@@ -113,7 +114,7 @@ export function LinkVault({ links }: LinkVaultProps) {
 
                                         <div className="flex items-center gap-3 text-sm text-muted-foreground/60">
                                             <span className="truncate max-w-[200px] hover:text-foreground/80 transition-colors">
-                                                {new URL(link.url).hostname}
+                                                {getSafeHostname(link.url)}
                                             </span>
 
                                             {link.italicKeyword && (

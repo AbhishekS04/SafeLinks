@@ -19,11 +19,16 @@ export async function addLink(prevState: LinkFormState, formData: FormData): Pro
         return { success: false, message: "Unauthorized" };
     }
 
-    const url = formData.get("url") as string;
+    let url = formData.get("url") as string;
     const title = formData.get("title") as string;
     const italicKeyword = formData.get("italicKeyword") as string;
     const contextNote = formData.get("contextNote") as string;
     const category = formData.get("category") as string;
+
+    // Basic sanitization
+    if (url && !url.startsWith('http') && url.includes('.')) {
+        url = `https://${url}`;
+    }
 
     if (!url || !title) {
         return { success: false, message: "URL and Title are required" };

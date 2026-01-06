@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, Link as LinkIcon, FileText } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Input } from "../ui/input";
+import { getSafeHostname } from "@/lib/url";
 
 import { useUi } from "@/components/providers/UiProvider";
 
@@ -39,7 +40,8 @@ export function SearchOverlay() {
                         type: "link",
                         title: l.title,
                         href: l.url,
-                        meta: l.category
+                        meta: l.category,
+                        hostname: getSafeHostname(l.url)
                     }));
 
                     setResults([

@@ -114,7 +114,15 @@ export function AddLink() {
                                             name="url"
                                             placeholder="Paste a URL here..."
                                             value={url}
-                                            onChange={(e) => setUrl(e.target.value)}
+                                            onChange={(e) => {
+                                                let val = e.target.value;
+                                                setUrl(val);
+                                            }}
+                                            onBlur={() => {
+                                                if (url && !url.startsWith('http') && url.includes('.')) {
+                                                    setUrl(`https://${url}`);
+                                                }
+                                            }}
                                             className="font-mono text-xs"
                                         />
                                         <Button
